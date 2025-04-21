@@ -22,16 +22,10 @@ function Box({ box, setBox, userOne, setUserOne, userTwo, setUserTwo }: props) {
 
   // useCallback(() => setUserOne([...userOne, box]), []);
   const handleClick = () => {
-    // setBox({ ...box, mark: userOne.length > userTwo.length ? "o" : "x" });
-    // setBoxCaller()
-    // setTimeout(() => {
-    //   setUserOneCaller();
-    // }, 2000);
-    // console.log(box);
-    // userOne.length > userTwo.length
-    // ?
-    // : setBox({ ...box, mark: "x" });
-    if (userOne.length > userTwo.length) {
+
+    // console.log();
+    
+    if (userOne.length > userTwo.length ) {
       setBox({ ...box, mark: "o" });
       setUserTwo([...userTwo, box.position]);
       
@@ -50,7 +44,7 @@ function Box({ box, setBox, userOne, setUserOne, userTwo, setUserTwo }: props) {
     //   setUserOne((prev) => [...prev, box]);
   };
   // console.log(box);
-  userOne && console.log("userone :", userOne, "box:", box);
+  userOne && console.log("userone :", userOne);
   const boxStyle = {
     width: "50px",
     height: "50px",
@@ -63,7 +57,7 @@ function Box({ box, setBox, userOne, setUserOne, userTwo, setUserTwo }: props) {
   // console.log("usertwo :", userTwo);
 
   return (
-    <div style={boxStyle} onClick={handleClick}>
+    <div style={boxStyle} aria-disabled onClick={handleClick}>
       {box.mark}
     </div>
   );

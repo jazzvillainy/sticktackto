@@ -10,8 +10,8 @@ interface box {
 
 function App() {
   // const [array, setArray] = useState<object[]>([]);
-  const [userOne, setUserOne] = useState<object[]>([]);
-  const [userTwo, setUserTwo] = useState<object[]>([]);
+  const [userOne, setUserOne] = useState<[]>([]);
+  const [userTwo, setUserTwo] = useState<[]>([]);
 
   const [box1, setBox1] = useState<box>({
     position: [1, 1],
@@ -72,9 +72,57 @@ function App() {
     [box9, setBox9],
   ];
 
+  const winner: boolean | string =
+    (userOne.find((i) => i == box1.position) &&
+      userOne.find((i) => i == box2.position) &&
+      userOne.find((i) => i == box3.position)) ||
+    (userOne.find((i) => i == box1.position) &&
+      userOne.find((i) => i == box4.position) &&
+      userOne.find((i) => i == box7.position)) ||
+    (userOne.find((i) => i == box1.position) &&
+      userOne.find((i) => i == box5.position) &&
+      userOne.find((i) => i == box9.position)) ||
+    (userOne.find((i) => i == box7.position) &&
+      userOne.find((i) => i == box8.position) &&
+      userOne.find((i) => i == box9.position)) ||
+    (userOne.find((i) => i == box3.position) &&
+      userOne.find((i) => i == box6.position) &&
+      userOne.find((i) => i == box9.position)) ||
+    (userOne.find((i) => i == box4.position) &&
+      userOne.find((i) => i == box5.position) &&
+      userOne.find((i) => i == box6.position)) ||
+    (userOne.find((i) => i == box3.position) &&
+      userOne.find((i) => i == box5.position) &&
+      userOne.find((i) => i == box7.position))
+      ? "userOne wins"
+      : (userTwo.find((i) => i == box1.position) &&
+          userTwo.find((i) => i == box2.position) &&
+          userTwo.find((i) => i == box3.position)) ||
+        (userTwo.find((i) => i == box1.position) &&
+          userTwo.find((i) => i == box4.position) &&
+          userTwo.find((i) => i == box7.position)) ||
+        (userTwo.find((i) => i == box1.position) &&
+          userTwo.find((i) => i == box5.position) &&
+          userTwo.find((i) => i == box9.position)) ||
+        (userTwo.find((i) => i == box7.position) &&
+          userTwo.find((i) => i == box8.position) &&
+          userTwo.find((i) => i == box9.position)) ||
+        (userTwo.find((i) => i == box3.position) &&
+          userTwo.find((i) => i == box6.position) &&
+          userTwo.find((i) => i == box9.position)) ||
+        (userTwo.find((i) => i == box4.position) &&
+          userTwo.find((i) => i == box5.position) &&
+          userTwo.find((i) => i == box6.position)) ||
+        (userTwo.find((i) => i == box3.position) &&
+          userTwo.find((i) => i == box5.position) &&
+          userTwo.find((i) => i == box7.position))
+      ? "userTwo wins"
+      : "";
+
   return (
     <>
-      {userOne.length > 4 || userTwo.length > 4 ? (
+      {(userOne.length > 4 && winner == "") ||
+      (userTwo.length > 4 && winner == "") ? (
         <div>game over</div>
       ) : (
         <div
@@ -102,6 +150,15 @@ function App() {
               />
             );
           })}
+          {userOne.length > 4 || userTwo.length > 4 ? (
+            <h1>{winner}</h1>
+          ) : (!winner && userOne.length > 4) ||
+            (!winner && userTwo.length > 4) ? (
+            <div>no winner</div>
+          ) : (
+            ""
+          )}
+          {userOne.length < 4 || userTwo.length < 4 ? <h1>{winner}</h1> : ""}
         </div>
       )}
     </>
@@ -109,4 +166,3 @@ function App() {
 }
 
 export default App;
-// </div>
