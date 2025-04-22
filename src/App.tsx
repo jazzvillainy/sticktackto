@@ -72,52 +72,123 @@ function App() {
     [box9, setBox9],
   ];
 
+  const oneTwoThree =
+    userOne.find((i) => i == box1.position) &&
+    userOne.find((i) => i == box2.position) &&
+    userOne.find((i) => i == box3.position) &&
+    true;
+  const oneFourSeven =
+    userOne.find((i) => i == box1.position) &&
+    userOne.find((i) => i == box4.position) &&
+    userOne.find((i) => i == box7.position) &&
+    true;
+
+  const oneFiveNine =
+    userOne.find((i) => i == box1.position) &&
+    userOne.find((i) => i == box5.position) &&
+    userOne.find((i) => i == box9.position) &&
+    true;
+
+  const sevenEightNine =
+    userOne.find((i) => i == box7.position) &&
+    userOne.find((i) => i == box8.position) &&
+    userOne.find((i) => i == box9.position) &&
+    true;
+
+  const threeSixNine =
+    userOne.find((i) => i == box3.position) &&
+    userOne.find((i) => i == box6.position) &&
+    userOne.find((i) => i == box9.position) &&
+    true;
+
+  const fourFiveSix =
+    userOne.find((i) => i == box4.position) &&
+    userOne.find((i) => i == box5.position) &&
+    userOne.find((i) => i == box6.position) &&
+    true;
+
+  const threeFiveSeven =
+    userOne.find((i) => i == box3.position) &&
+    userOne.find((i) => i == box5.position) &&
+    userOne.find((i) => i == box7.position) &&
+    true;
+
+  const twoFiveEight =
+    userOne.find((i) => i == box2.position) &&
+    userOne.find((i) => i == box5.position) &&
+    userOne.find((i) => i == box8.position) &&
+    true;
+
+  // userTwo conditionals
+
+  const ThreeTwoOne =
+    userTwo.find((i) => i == box1.position) &&
+    userTwo.find((i) => i == box2.position) &&
+    userTwo.find((i) => i == box3.position) &&
+    true;
+
+  const SevenFourOne =
+    userTwo.find((i) => i == box1.position) &&
+    userTwo.find((i) => i == box4.position) &&
+    userTwo.find((i) => i == box7.position) &&
+    true;
+
+  const NineFiveOne =
+    userTwo.find((i) => i == box1.position) &&
+    userTwo.find((i) => i == box5.position) &&
+    userTwo.find((i) => i == box9.position) &&
+    true;
+
+  const NineEightSeven =
+    userTwo.find((i) => i == box7.position) &&
+    userTwo.find((i) => i == box8.position) &&
+    userTwo.find((i) => i == box9.position) &&
+    true;
+
+  const NineSixThree =
+    userTwo.find((i) => i == box3.position) &&
+    userTwo.find((i) => i == box6.position) &&
+    userTwo.find((i) => i == box9.position) &&
+    true;
+
+  const SixFiveFour =
+    userTwo.find((i) => i == box4.position) &&
+    userTwo.find((i) => i == box5.position) &&
+    userTwo.find((i) => i == box6.position) &&
+    true;
+
+  const SevenFiveThree =
+    userTwo.find((i) => i == box3.position) &&
+    userTwo.find((i) => i == box5.position) &&
+    userTwo.find((i) => i == box7.position) &&
+    true;
+  const EightFiveTwo =
+    userTwo.find((i) => i == box2.position) &&
+    userTwo.find((i) => i == box5.position) &&
+    userTwo.find((i) => i == box8.position) &&
+    true;
+
   const winner: boolean | string =
-    (userOne.find((i) => i == box1.position) &&
-      userOne.find((i) => i == box2.position) &&
-      userOne.find((i) => i == box3.position)) ||
-    (userOne.find((i) => i == box1.position) &&
-      userOne.find((i) => i == box4.position) &&
-      userOne.find((i) => i == box7.position)) ||
-    (userOne.find((i) => i == box1.position) &&
-      userOne.find((i) => i == box5.position) &&
-      userOne.find((i) => i == box9.position)) ||
-    (userOne.find((i) => i == box7.position) &&
-      userOne.find((i) => i == box8.position) &&
-      userOne.find((i) => i == box9.position)) ||
-    (userOne.find((i) => i == box3.position) &&
-      userOne.find((i) => i == box6.position) &&
-      userOne.find((i) => i == box9.position)) ||
-    (userOne.find((i) => i == box4.position) &&
-      userOne.find((i) => i == box5.position) &&
-      userOne.find((i) => i == box6.position)) ||
-    (userOne.find((i) => i == box3.position) &&
-      userOne.find((i) => i == box5.position) &&
-      userOne.find((i) => i == box7.position))
+    oneTwoThree ||
+    oneFourSeven ||
+    oneFiveNine ||
+    sevenEightNine ||
+    threeSixNine ||
+    fourFiveSix ||
+    threeFiveSeven ||
+    twoFiveEight
       ? "userOne wins"
-      : (userTwo.find((i) => i == box1.position) &&
-          userTwo.find((i) => i == box2.position) &&
-          userTwo.find((i) => i == box3.position)) ||
-        (userTwo.find((i) => i == box1.position) &&
-          userTwo.find((i) => i == box4.position) &&
-          userTwo.find((i) => i == box7.position)) ||
-        (userTwo.find((i) => i == box1.position) &&
-          userTwo.find((i) => i == box5.position) &&
-          userTwo.find((i) => i == box9.position)) ||
-        (userTwo.find((i) => i == box7.position) &&
-          userTwo.find((i) => i == box8.position) &&
-          userTwo.find((i) => i == box9.position)) ||
-        (userTwo.find((i) => i == box3.position) &&
-          userTwo.find((i) => i == box6.position) &&
-          userTwo.find((i) => i == box9.position)) ||
-        (userTwo.find((i) => i == box4.position) &&
-          userTwo.find((i) => i == box5.position) &&
-          userTwo.find((i) => i == box6.position)) ||
-        (userTwo.find((i) => i == box3.position) &&
-          userTwo.find((i) => i == box5.position) &&
-          userTwo.find((i) => i == box7.position))
+      : ThreeTwoOne ||
+        SevenFourOne ||
+        NineFiveOne ||
+        NineEightSeven ||
+        NineSixThree ||
+        SixFiveFour ||
+        SevenFiveThree ||
+        EightFiveTwo
       ? "userTwo wins"
       : "";
+  console.log(winner);
 
   return (
     <>
@@ -125,24 +196,13 @@ function App() {
       (userTwo.length > 4 && winner == "") ? (
         <div>game over</div>
       ) : (
-        <div
-          style={{
-            background: "pink",
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "100px",
-            fontSize: "50px",
-          }}
-        >
+        <div className="bg-stone-500 w-full max-lg:h-[100dvw] lg:w-1/2 h-[100dvh] grid grid-cols-3 gap-1 ">
           {boxSetters.map(([box, setBox], index: number) => {
-            // const currentBox = box as box;
-            // const currentSetBox = setBox as React.Dispatch<React.SetStateAction<box>>;
             return (
               <Box
                 key={index}
                 box={box}
                 setBox={setBox}
-                // boxSetters={boxSetters}
                 userOne={userOne}
                 userTwo={userTwo}
                 setUserOne={setUserOne}
@@ -150,17 +210,24 @@ function App() {
               />
             );
           })}
-          {userOne.length > 4 || userTwo.length > 4 ? (
-            <h1>{winner}</h1>
+          {}
+          {/* {userOne.length > 4 && !winner && userTwo.length > 4 && !winner ? (
+            <h1 className="absolute">GAME OVER</h1>
           ) : (!winner && userOne.length > 4) ||
             (!winner && userTwo.length > 4) ? (
             <div>no winner</div>
           ) : (
             ""
+          )} */}
+          {userOne.length < 4 || userTwo.length < 4 ? (
+            <h1 className=" bg-slate-500 absolute w-full">{winner}</h1>
+          ) : (
+            ""
           )}
-          {userOne.length < 4 || userTwo.length < 4 ? <h1>{winner}</h1> : ""}
+          {<div className="absolute">{winner}</div>}
         </div>
       )}
+      {/* <div className="bg-slate-400 absolute ">jlwdna</div> */}
     </>
   );
 }
