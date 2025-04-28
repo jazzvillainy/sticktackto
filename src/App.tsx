@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Box from "./Box";
+import Overlay from "./Overlay";
+
 
 interface box {
   position: number[];
@@ -228,6 +230,7 @@ function App() {
         </div>
       )}
       {/* <div className="bg-slate-400 absolute ">jlwdna</div> */}
+      <Overlay oneTwoThree={oneTwoThree} ThreeTwoOne={ThreeTwoOne} />
     </>
   );
 }

@@ -57,15 +57,34 @@ function Box({ box, setBox, userOne, setUserOne, userTwo, setUserTwo }: props) {
   // console.log("usertwo :", userTwo);
 
   return (
-    <div className="bg-black w-full h-full relative m" onClick={handleClick}>
-      {box.mark == "x" ? (
-        <img src={xIcon} className="absolute scale-125 w-full" alt="" />
-      ) : box.mark == "o" ? (
-        <img src={oIcon} className="absolute w-full" color="red" />
-      ) : (
-        ""
+    <>
+      {box.mark == "" && (
+        <div
+          className="bg-black w-full h-full relative m"
+          onClick={handleClick}
+        >
+          {/* {box.mark == "x" ? (
+            <img src={xIcon} className="absolute scale-125 w-full" alt="" />
+          ) : box.mark == "o" ? (
+            <img src={oIcon} className="absolute w-full" color="red" />
+          ) : (
+            ""
+          )} */}
+        </div>
       )}
-    </div>
+      {(box.mark == "x" || box.mark == "o") && (
+        <div className="bg-black w-full h-full relative m">
+          {" "}
+          {box.mark == "x" ? (
+            <img src={xIcon} className="absolute scale-125 w-full" alt="" />
+          ) : box.mark == "o" ? (
+            <img src={oIcon} className="absolute w-full" color="red" />
+          ) : (
+            ""
+          )}
+        </div>
+      )}
+    </>
   );
 }
 
