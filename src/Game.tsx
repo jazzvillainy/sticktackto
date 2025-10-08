@@ -7,6 +7,15 @@ export function Game() {
   const [userOne, setUserOne] = useState<number[][]>([]);
   const [userTwo, setUserTwo] = useState<number[][]>([]);
 
+  const socket = new WebSocket("ws://localhost:4001");
+  socket.addEventListener("open", () => {
+    console.log("WebSocket connection established!");
+
+    
+
+  
+  });
+
   const [box1, setBox1] = useState<box>({
     position: [1, 1],
     mark: "",
@@ -180,7 +189,6 @@ export function Game() {
         EightFiveTwo
       ? "userTwo wins"
       : "";
- 
 
   return (
     <>
@@ -202,7 +210,7 @@ export function Game() {
               />
             );
           })}
-          
+
           {userOne.length < 4 || userTwo.length < 4 ? (
             <h1 className=" bg-slate-500 absolute w-full">{winner}</h1>
           ) : (
@@ -211,7 +219,7 @@ export function Game() {
           {<div className="absolute">{winner}</div>}
         </div>
       )}
-     
+
       <Overlay oneTwoThree={oneTwoThree} ThreeTwoOne={ThreeTwoOne} />
       {/* <div>multiplayer</div>
       <div>CPU</div> */}
