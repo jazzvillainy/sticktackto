@@ -1,19 +1,11 @@
 import { useState } from "react";
 import Box from "./Box";
 import Overlay from "./Overlay";
+import { box, wincombination } from "./types";
 
-
-interface box {
-  position: number[];
-  mark: string;
-}
-
-// type reactType = React.Dispatch<React.SetStateAction<box>>;
-
-function App() {
-  // const [array, setArray] = useState<object[]>([]);
-  const [userOne, setUserOne] = useState<[]>([]);
-  const [userTwo, setUserTwo] = useState<[]>([]);
+function Game() {
+  const [userOne, setUserOne] = useState<number[][]>([]);
+  const [userTwo, setUserTwo] = useState<number[][]>([]);
 
   const [box1, setBox1] = useState<box>({
     position: [1, 1],
@@ -60,9 +52,7 @@ function App() {
     mark: "",
   });
 
-  // const boxes = [box1, box2, box3, box4, box5, box6, box7, box8, box9];
-
-  const boxSetters = [
+  const boxSetters: [box, React.Dispatch<React.SetStateAction<box>>][] = [
     [box1, setBox1],
     [box2, setBox2],
     [box3, setBox3],
@@ -74,48 +64,48 @@ function App() {
     [box9, setBox9],
   ];
 
-  const oneTwoThree =
+  const oneTwoThree: wincombination =
     userOne.find((i) => i == box1.position) &&
     userOne.find((i) => i == box2.position) &&
     userOne.find((i) => i == box3.position) &&
     true;
-  const oneFourSeven =
+  const oneFourSeven: wincombination =
     userOne.find((i) => i == box1.position) &&
     userOne.find((i) => i == box4.position) &&
     userOne.find((i) => i == box7.position) &&
     true;
 
-  const oneFiveNine =
+  const oneFiveNine: wincombination =
     userOne.find((i) => i == box1.position) &&
     userOne.find((i) => i == box5.position) &&
     userOne.find((i) => i == box9.position) &&
     true;
 
-  const sevenEightNine =
+  const sevenEightNine: wincombination =
     userOne.find((i) => i == box7.position) &&
     userOne.find((i) => i == box8.position) &&
     userOne.find((i) => i == box9.position) &&
     true;
 
-  const threeSixNine =
+  const threeSixNine: wincombination =
     userOne.find((i) => i == box3.position) &&
     userOne.find((i) => i == box6.position) &&
     userOne.find((i) => i == box9.position) &&
     true;
 
-  const fourFiveSix =
+  const fourFiveSix: wincombination =
     userOne.find((i) => i == box4.position) &&
     userOne.find((i) => i == box5.position) &&
     userOne.find((i) => i == box6.position) &&
     true;
 
-  const threeFiveSeven =
+  const threeFiveSeven: wincombination =
     userOne.find((i) => i == box3.position) &&
     userOne.find((i) => i == box5.position) &&
     userOne.find((i) => i == box7.position) &&
     true;
 
-  const twoFiveEight =
+  const twoFiveEight: wincombination =
     userOne.find((i) => i == box2.position) &&
     userOne.find((i) => i == box5.position) &&
     userOne.find((i) => i == box8.position) &&
@@ -123,48 +113,48 @@ function App() {
 
   // userTwo conditionals
 
-  const ThreeTwoOne =
+  const ThreeTwoOne: wincombination =
     userTwo.find((i) => i == box1.position) &&
     userTwo.find((i) => i == box2.position) &&
     userTwo.find((i) => i == box3.position) &&
     true;
 
-  const SevenFourOne =
+  const SevenFourOne: wincombination =
     userTwo.find((i) => i == box1.position) &&
     userTwo.find((i) => i == box4.position) &&
     userTwo.find((i) => i == box7.position) &&
     true;
 
-  const NineFiveOne =
+  const NineFiveOne: wincombination =
     userTwo.find((i) => i == box1.position) &&
     userTwo.find((i) => i == box5.position) &&
     userTwo.find((i) => i == box9.position) &&
     true;
 
-  const NineEightSeven =
+  const NineEightSeven: wincombination =
     userTwo.find((i) => i == box7.position) &&
     userTwo.find((i) => i == box8.position) &&
     userTwo.find((i) => i == box9.position) &&
     true;
 
-  const NineSixThree =
+  const NineSixThree: wincombination =
     userTwo.find((i) => i == box3.position) &&
     userTwo.find((i) => i == box6.position) &&
     userTwo.find((i) => i == box9.position) &&
     true;
 
-  const SixFiveFour =
+  const SixFiveFour: wincombination =
     userTwo.find((i) => i == box4.position) &&
     userTwo.find((i) => i == box5.position) &&
     userTwo.find((i) => i == box6.position) &&
     true;
 
-  const SevenFiveThree =
+  const SevenFiveThree: wincombination =
     userTwo.find((i) => i == box3.position) &&
     userTwo.find((i) => i == box5.position) &&
     userTwo.find((i) => i == box7.position) &&
     true;
-  const EightFiveTwo =
+  const EightFiveTwo: wincombination =
     userTwo.find((i) => i == box2.position) &&
     userTwo.find((i) => i == box5.position) &&
     userTwo.find((i) => i == box8.position) &&
@@ -231,6 +221,16 @@ function App() {
       )}
       {/* <div className="bg-slate-400 absolute ">jlwdna</div> */}
       <Overlay oneTwoThree={oneTwoThree} ThreeTwoOne={ThreeTwoOne} />
+      {/* <div>multiplayer</div>
+      <div>CPU</div> */}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Game />
     </>
   );
 }
