@@ -7,15 +7,6 @@ export function Game() {
   const [userOne, setUserOne] = useState<number[][]>([]);
   const [userTwo, setUserTwo] = useState<number[][]>([]);
 
-  const socket = new WebSocket("ws://localhost:4001");
-  socket.addEventListener("open", () => {
-    console.log("WebSocket connection established!");
-
-    
-
-  
-  });
-
   const [box1, setBox1] = useState<box>({
     position: [1, 1],
     mark: "",

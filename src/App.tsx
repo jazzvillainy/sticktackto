@@ -1,10 +1,12 @@
+import { SocketContextProvider } from "./context";
 import { Game } from "./Game";
 
 function App() {
-  
   return (
     <>
-      <Game />
+      <SocketContextProvider>
+        <Game />
+      </SocketContextProvider>
     </>
   );
 }

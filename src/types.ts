@@ -11,6 +11,7 @@ export interface BoxProps {
   setUserOne: React.Dispatch<React.SetStateAction<number[][]>>;
   userTwo: number[][];
   setUserTwo: React.Dispatch<React.SetStateAction<number[][]>>;
+  // socket: WebSocket
 }
 
 export type wincombination = boolean | undefined;
