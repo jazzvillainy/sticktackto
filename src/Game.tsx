@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Box from "./Box";
 import Overlay from "./Overlay";
 import { box, wincombination } from "./types";
@@ -65,14 +65,30 @@ export function Game() {
     [box9, setBox9],
   ];
 
-  type data = box;
+  type data = string;
 
   const SocketInstance = useContext(SocketContext);
 
   SocketInstance?.addEventListener("message", (x: MessageEvent<data>) => {
-    boxSetters.map(([box, setBox]) => {
-      if (box.position == x.data.position) setBox({ ...x.data });
-    });
+    const {
+      position: [i, j],
+      mark,
+    } = JSON.parse(x.data);
+
+    console.log("message recieved:");
+
+    boxSetters.map(
+      ([
+        {
+          position: [x, y],
+        },
+        setBox,
+      ]) => {
+        if (i == x && j == y) setBox({ position: [i, j], mark });
+        // if (box.position == parsedData.position) {
+        // }
+      }
+    );
   });
 
   const oneTwoThree: wincombination =
