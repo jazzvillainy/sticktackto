@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Box from "./Box";
 import Overlay from "./Overlay";
 import { box, wincombination } from "./types";
+import { SocketContext } from "./context";
 
 export function Game() {
   const [userOne, setUserOne] = useState<number[][]>([]);
@@ -63,6 +64,16 @@ export function Game() {
     [box8, setBox8],
     [box9, setBox9],
   ];
+
+  type data = box;
+
+  const SocketInstance = useContext(SocketContext);
+
+  SocketInstance?.addEventListener("message", (x: MessageEvent<data>) => {
+    boxSetters.map(([box, setBox]) => {
+      if (box.position == x.data.position) setBox({ ...x.data });
+    });
+  });
 
   const oneTwoThree: wincombination =
     userOne.find((i) => i == box1.position) &&

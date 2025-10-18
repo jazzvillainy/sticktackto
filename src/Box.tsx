@@ -12,7 +12,9 @@ function Box({
   userTwo,
   setUserTwo,
 }: BoxProps) {
-  const handleClick = () => {
+  const SocketInstance = useContext(SocketContext);
+
+  const handleClick = (clickedBoxPosition: number[]) => {
     if (userOne.length > userTwo.length) {
       setBox({ ...box, mark: "o" });
       setUserTwo([...userTwo, box.position]);
@@ -20,26 +22,29 @@ function Box({
       setBox({ ...box, mark: "x" });
       setUserOne([...userOne, box.position]);
     }
+    // const parsedKey = JSON.stringify(position);
+
+    if (clickedBoxPosition == box.position) {
+      try {
+        if (!SocketInstance) throw new Error("there is no socekt connection");
+        console.log(`attempting to send box ${clickedBoxPosition}`);
+        userOne.length > userTwo.length
+          ? SocketInstance?.send(JSON.stringify({ ...box, mark: "o" }))
+          : SocketInstance?.send(JSON.stringify({ ...box, mark: "x" }));
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   
-  try {
-    if (!useContext(SocketContext)) throw new Error("webpisnvnvsd");
-    useContext(SocketContext)?.send(JSON.stringify({ userOne, userTwo }));
-  } catch {}
-  useContext(SocketContext)?.addEventListener("message", (x) => {
-    try {
-      
-      
-      console.log(x.data);
-      if (!x.data) {
-        throw new Error("ljsnkdbkafd");
-      }
-      // You can update state here if needed
-    } catch (err) {
-      console.error("Failed to parse socket message:", err);
-    }
-  });
+
+  //if the incoming box id is == a certain box, update that box
+
+  //user two should always be the data that travels over the ws
+  //now its to find out how to make a multiple connections to one socket instance\
+  // const parsedKey = JSON.parse(key);
+
   // useEffect(() => {}, [setBox]);
 
   // userOne && console.log("userone :", userOne);
@@ -49,7 +54,7 @@ function Box({
       {!box.mark && (
         <div
           className="bg-black w-full h-full relative m"
-          onClick={handleClick}
+          onClick={() => handleClick(box.position)}
         ></div>
       )}
       {box.mark && (
