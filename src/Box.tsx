@@ -17,10 +17,10 @@ function Box({
   const handleClick = (clickedBoxPosition: number[]) => {
     if (userOne.length > userTwo.length) {
       setBox({ ...box, mark: "o" });
-      setUserTwo([...userTwo, box.position]);
+      setUserTwo([...userTwo, box.position.toString()]);
     } else {
       setBox({ ...box, mark: "x" });
-      setUserOne([...userOne, box.position]);
+      setUserOne([...userOne, box.position.toString]);
     }
     // const parsedKey = JSON.stringify(position);
 
@@ -29,15 +29,23 @@ function Box({
         if (!SocketInstance) throw new Error("there is no socekt connection");
         console.log(`attempting to send box ${clickedBoxPosition}`);
         userOne.length > userTwo.length
-          ? SocketInstance?.send(JSON.stringify({ ...box, mark: "o" }))
-          : SocketInstance?.send(JSON.stringify({ ...box, mark: "x" }));
+          ? SocketInstance?.send(
+              JSON.stringify([
+                { ...box, mark: "o" },
+                { userTwo: [...userTwo, box.position], userOne },
+              ])
+            )
+          : SocketInstance?.send(
+              JSON.stringify([
+                { ...box, mark: "x" },
+                { userTwo, userOne: [...userOne, box.position] },
+              ])
+            );
       } catch (err) {
         console.log(err);
       }
     }
   };
-
-  
 
   //if the incoming box id is == a certain box, update that box
 

@@ -14,4 +14,6 @@ export interface BoxProps {
   // socket: WebSocket
 }
 
+export type userState = string | number[];
+
 export type wincombination = boolean | undefined;

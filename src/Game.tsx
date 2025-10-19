@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Box from "./Box";
 import Overlay from "./Overlay";
 import { box, wincombination } from "./types";
 import { SocketContext } from "./context";
+
 
 export function Game() {
   const [userOne, setUserOne] = useState<number[][]>([]);
@@ -70,12 +71,23 @@ export function Game() {
   const SocketInstance = useContext(SocketContext);
 
   SocketInstance?.addEventListener("message", (x: MessageEvent<data>) => {
-    const {
-      position: [i, j],
-      mark,
-    } = JSON.parse(x.data);
+    const [
+      {
+        position: [i, j],
+        mark,
+      },
+      transferredStates,
+    ] = JSON.parse(x.data);
 
-    console.log("message recieved:");
+    // console.log("message recieved:", "other user:", transferredStates);
+
+    // console.log("transferred state:", transferredStates.userOne[0]);
+    console.log("box1:", box1.position);
+
+    transferredStates.userOne[0] == box1.position && console.log("identical");
+
+    setUserTwo([...transferredStates.userTwo]);
+    setUserOne([...transferredStates.userOne]);
 
     boxSetters.map(
       ([
@@ -84,9 +96,10 @@ export function Game() {
         },
         setBox,
       ]) => {
-        if (i == x && j == y) setBox({ position: [i, j], mark });
-        // if (box.position == parsedData.position) {
-        // }
+        if (i == x && j == y) {
+          setBox({ position: [i, j], mark });
+        }
+        // console.log(otherUser);
       }
     );
   });
@@ -210,6 +223,7 @@ export function Game() {
 
   return (
     <>
+      <div className="text-red-500">{`userOne: ${userOne} userTwo: ${userTwo}`}</div>
       {(userOne.length > 4 && winner == "") ||
       (userTwo.length > 4 && winner == "") ? (
         <div>game over</div>
