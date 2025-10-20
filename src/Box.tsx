@@ -1,7 +1,7 @@
 import xIcon from "./assets/close_112dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png";
 import oIcon from "./assets/radio_button_unchecked_112dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png";
 import { SocketContext } from "./context";
-import { BoxProps } from "./types";
+import { boxPosition, BoxProps } from "./types";
 import { useContext } from "react";
 
 function Box({
@@ -14,13 +14,13 @@ function Box({
 }: BoxProps) {
   const SocketInstance = useContext(SocketContext);
 
-  const handleClick = (clickedBoxPosition: number[]) => {
+  const handleClick = (clickedBoxPosition: boxPosition) => {
     if (userOne.length > userTwo.length) {
       setBox({ ...box, mark: "o" });
       setUserTwo([...userTwo, box.position.toString()]);
     } else {
       setBox({ ...box, mark: "x" });
-      setUserOne([...userOne, box.position.toString]);
+      setUserOne([...userOne, box.position.toString()]);
     }
     // const parsedKey = JSON.stringify(position);
 

@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
 import Box from "./Box";
 import Overlay from "./Overlay";
-import { box, wincombination } from "./types";
+import { box, boxPosition, wincombination } from "./types";
 import { SocketContext } from "./context";
 
 
 export function Game() {
-  const [userOne, setUserOne] = useState<number[][]>([]);
-  const [userTwo, setUserTwo] = useState<number[][]>([]);
+  const [userOne, setUserOne] = useState<boxPosition[]>([]);
+  const [userTwo, setUserTwo] = useState<boxPosition[]>([]);
 
   const [box1, setBox1] = useState<box>({
     position: [1, 1],

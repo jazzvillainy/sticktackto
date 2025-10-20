@@ -1,5 +1,5 @@
 export interface box {
-  position: number[];
+  position: boxPosition
   mark: string;
 }
 
@@ -7,13 +7,13 @@ export interface BoxProps {
   box: box;
   setBox: React.Dispatch<React.SetStateAction<box>>;
   boxSetters?: [];
-  userOne: number[][];
-  setUserOne: React.Dispatch<React.SetStateAction<number[][]>>;
-  userTwo: number[][];
-  setUserTwo: React.Dispatch<React.SetStateAction<number[][]>>;
+  userOne: boxPosition[];
+  setUserOne: React.Dispatch<React.SetStateAction<boxPosition[]>>;
+  userTwo: boxPosition[];
+  setUserTwo: React.Dispatch<React.SetStateAction<boxPosition[]>>;
   // socket: WebSocket
 }
 
-export type userState = string | number[];
+export type boxPosition = number[] | string;
 
-export type wincombination = boolean | undefined;
+export type wincombination = true | "" | undefined;
