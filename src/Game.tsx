@@ -4,7 +4,6 @@ import Overlay from "./Overlay";
 import { box, boxPosition, wincombination } from "./types";
 import { SocketContext } from "./context";
 
-
 export function Game() {
   const [userOne, setUserOne] = useState<boxPosition[]>([]);
   const [userTwo, setUserTwo] = useState<boxPosition[]>([]);
@@ -223,7 +222,6 @@ export function Game() {
 
   return (
     <>
-      <div className="text-red-500">{`userOne: ${userOne} userTwo: ${userTwo}`}</div>
       {(userOne.length > 4 && winner == "") ||
       (userTwo.length > 4 && winner == "") ? (
         <div>game over</div>
