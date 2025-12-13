@@ -226,33 +226,42 @@ export function Game() {
       (userTwo.length > 4 && winner == "") ? (
         <div>game over</div>
       ) : (
-        <div className="bg-stone-500 w-full max-lg:h-[100dvw] lg:w-1/2 h-[100dvh] grid grid-cols-3 gap-1 ">
-          {boxSetters.map(([box, setBox], index: number) => {
-            return (
-              <Box
-                key={index}
-                box={box}
-                setBox={setBox}
-                userOne={userOne}
-                userTwo={userTwo}
-                setUserOne={setUserOne}
-                setUserTwo={setUserTwo}
-              />
-            );
-          })}
+        <div
+          id="boxer"
+          className="min-h-screen flex items-center justify-center bg-[#020617] p-6"
+        >
+          <div className="neon-board w-[min(92vmin,640px)] aspect-square grid grid-cols-3 gap-3 p-3 relative">
+            {boxSetters.map(([box, setBox], index: number) => {
+              return (
+                <Box
+                  key={index}
+                  box={box}
+                  setBox={setBox}
+                  userOne={userOne}
+                  userTwo={userTwo}
+                  setUserOne={setUserOne}
+                  setUserTwo={setUserTwo}
+                />
+              );
+            })}
 
-          {userOne.length < 4 || userTwo.length < 4 ? (
-            <h1 className=" bg-slate-500 absolute w-full">{winner}</h1>
-          ) : (
-            ""
-          )}
-          {<div className="absolute">{winner}</div>}
+            {userOne.length < 4 || userTwo.length < 4 ? (
+             winner && <h1 className="absolute top-3 left-1/2 -translate-x-1/2 text-sm text-cyan-200/90 bg-black/30 backdrop-blur rounded px-3 py-1 border border-cyan-400/10">
+                {winner}
+              </h1>
+            ) : (
+              ""
+            )}
+            {
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 text-cyan-100/80">
+                {winner}
+              </div>
+            }
+          </div>
         </div>
       )}
 
       <Overlay oneTwoThree={oneTwoThree} ThreeTwoOne={ThreeTwoOne} />
-      {/* <div>multiplayer</div>
-      <div>CPU</div> */}
     </>
   );
 }

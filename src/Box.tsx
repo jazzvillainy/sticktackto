@@ -58,26 +58,34 @@ function Box({
   // userOne && console.log("userone :", userOne);
 
   return (
-    <>
+    <div className="neon-cell aspect-square rounded-md overflow-hidden grid-separator">
       {!box.mark && (
-        <div
-          className="bg-black w-full h-full relative m"
+        <button
+          className="w-full h-full block bg-transparent"
           onClick={() => handleClick(box.position)}
-        ></div>
+          aria-label={`box-${box.position}`}
+        />
       )}
       {box.mark && (
-        <div className="bg-black w-full h-full relative m">
-          {" "}
+        <div className="w-full h-full relative flex items-center justify-center">
           {box.mark == "x" ? (
-            <img src={xIcon} className="absolute scale-125 w-full" alt="" />
+            <img
+              src={xIcon}
+              className="w-3/4 h-3/4 object-contain"
+              alt="X mark"
+            />
           ) : box.mark == "o" ? (
-            <img src={oIcon} className="absolute w-full" color="red" />
+            <img
+              src={oIcon}
+              className="w-3/4 h-3/4 object-contain"
+              alt="O mark"
+            />
           ) : (
             ""
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
 

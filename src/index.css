@@ -9,7 +9,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87); */
-  background-color:black;
+  background-color: black;
   /* height: 100dvh;
   width: 100%;
   position: relative; */
@@ -80,3 +80,49 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+/* --- Futuristic neon / glass helpers --- */
+.neon-board {
+  background: linear-gradient(
+    135deg,
+    rgba(3, 7, 18, 0.95) 0%,
+    rgba(6, 10, 20, 0.9) 50%,
+    rgba(1, 6, 12, 0.95) 100%
+  );
+  border-radius: 1rem;
+  box-shadow: 0 6px 30px rgba(2, 10, 30, 0.6),
+    0 0 30px rgba(0, 220, 255, 0.03) inset;
+  border: 1px solid rgba(0, 200, 255, 0.06);
+  backdrop-filter: blur(6px) saturate(120%);
+}
+
+/* each cell border + subtle neon highlight on hover */
+.neon-cell {
+  border: 1.5px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  transition: box-shadow 160ms ease, transform 120ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(0, 0, 0, 0.03)
+  );
+}
+.neon-cell:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(6, 180, 255, 0.06),
+    0 0 18px rgba(6, 180, 255, 0.04) inset;
+}
+
+/* thin separators to make the grid feel crisp (optional visual tweak) */
+.grid-separator {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+/* small utility for subtle neon text */
+.text-neon {
+  color: rgba(144, 248, 255, 0.95);
+  text-shadow: 0 1px 8px rgba(0, 220, 255, 0.06);
+}
