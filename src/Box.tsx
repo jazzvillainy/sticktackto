@@ -26,16 +26,18 @@ function Box({
 
     if (clickedBoxPosition == box.position) {
       try {
-        if (!SocketInstance) throw new Error("there is no socekt connection");
+        if (!SocketInstance || !SocketInstance.socket)
+          throw new Error("there is no socket connection");
         console.log(`attempting to send box ${clickedBoxPosition}`);
+        const ws = SocketInstance.socket;
         userOne.length > userTwo.length
-          ? SocketInstance?.send(
+          ? ws.send(
               JSON.stringify([
                 { ...box, mark: "o" },
                 { userTwo: [...userTwo, box.position], userOne },
               ])
             )
-          : SocketInstance?.send(
+          : ws.send(
               JSON.stringify([
                 { ...box, mark: "x" },
                 { userTwo, userOne: [...userOne, box.position] },
@@ -77,7 +79,7 @@ function Box({
           ) : box.mark == "o" ? (
             <img
               src={oIcon}
-              className="w-3/4 h-3/4 object-contain"
+              className="w-3/4 h-3/4 object-contain scale-75"
               alt="O mark"
             />
           ) : (

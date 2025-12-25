@@ -69,39 +69,42 @@ export function Game() {
 
   const SocketInstance = useContext(SocketContext);
 
-  SocketInstance?.addEventListener("message", (x: MessageEvent<data>) => {
-    const [
-      {
-        position: [i, j],
-        mark,
-      },
-      transferredStates,
-    ] = JSON.parse(x.data);
-
-    // console.log("message recieved:", "other user:", transferredStates);
-
-    // console.log("transferred state:", transferredStates.userOne[0]);
-    console.log("box1:", box1.position);
-
-    transferredStates.userOne[0] == box1.position && console.log("identical");
-
-    setUserTwo([...transferredStates.userTwo]);
-    setUserOne([...transferredStates.userOne]);
-
-    boxSetters.map(
-      ([
+  SocketInstance?.socket?.addEventListener(
+    "message",
+    (x: MessageEvent<data>) => {
+      const [
         {
-          position: [x, y],
+          position: [i, j],
+          mark,
         },
-        setBox,
-      ]) => {
-        if (i == x && j == y) {
-          setBox({ position: [i, j], mark });
+        transferredStates,
+      ] = JSON.parse(x.data);
+
+      // console.log("message recieved:", "other user:", transferredStates);
+
+      // console.log("transferred state:", transferredStates.userOne[0]);
+      console.log("box1:", box1.position);
+
+      transferredStates.userOne[0] == box1.position && console.log("identical");
+
+      setUserTwo([...transferredStates.userTwo]);
+      setUserOne([...transferredStates.userOne]);
+
+      boxSetters.map(
+        ([
+          {
+            position: [x, y],
+          },
+          setBox,
+        ]) => {
+          if (i == x && j == y) {
+            setBox({ position: [i, j], mark });
+          }
+          // console.log(otherUser);
         }
-        // console.log(otherUser);
-      }
-    );
-  });
+      );
+    }
+  );
 
   const oneTwoThree: wincombination =
     userOne.find((i) => i == box1.position) &&
@@ -245,23 +248,147 @@ export function Game() {
               );
             })}
 
-            {userOne.length < 4 || userTwo.length < 4 ? (
-             winner && <h1 className="absolute top-3 left-1/2 -translate-x-1/2 text-sm text-cyan-200/90 bg-black/30 backdrop-blur rounded px-3 py-1 border border-cyan-400/10">
-                {winner}
-              </h1>
-            ) : (
-              ""
-            )}
-            {
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 text-cyan-100/80">
-                {winner}
-              </div>
-            }
+            {/* compute winning positions for overlay (endpoints are first and last cell of the winning triple) */}
+            {(() => {
+              let winningPositions = null as boxPosition[] | null;
+              if (oneTwoThree)
+                winningPositions = [
+                  box1.position,
+                  box2.position,
+                  box3.position,
+                ];
+              else if (oneFourSeven)
+                winningPositions = [
+                  box1.position,
+                  box4.position,
+                  box7.position,
+                ];
+              else if (oneFiveNine)
+                winningPositions = [
+                  box1.position,
+                  box5.position,
+                  box9.position,
+                ];
+              else if (sevenEightNine)
+                winningPositions = [
+                  box7.position,
+                  box8.position,
+                  box9.position,
+                ];
+              else if (threeSixNine)
+                winningPositions = [
+                  box3.position,
+                  box6.position,
+                  box9.position,
+                ];
+              else if (fourFiveSix)
+                winningPositions = [
+                  box4.position,
+                  box5.position,
+                  box6.position,
+                ];
+              else if (threeFiveSeven)
+                winningPositions = [
+                  box3.position,
+                  box5.position,
+                  box7.position,
+                ];
+              else if (twoFiveEight)
+                winningPositions = [
+                  box2.position,
+                  box5.position,
+                  box8.position,
+                ];
+              else if (ThreeTwoOne)
+                winningPositions = [
+                  box1.position,
+                  box2.position,
+                  box3.position,
+                ];
+              else if (SevenFourOne)
+                winningPositions = [
+                  box1.position,
+                  box4.position,
+                  box7.position,
+                ];
+              else if (NineFiveOne)
+                winningPositions = [
+                  box1.position,
+                  box5.position,
+                  box9.position,
+                ];
+              else if (NineEightSeven)
+                winningPositions = [
+                  box7.position,
+                  box8.position,
+                  box9.position,
+                ];
+              else if (NineSixThree)
+                winningPositions = [
+                  box3.position,
+                  box6.position,
+                  box9.position,
+                ];
+              else if (SixFiveFour)
+                winningPositions = [
+                  box4.position,
+                  box5.position,
+                  box6.position,
+                ];
+              else if (SevenFiveThree)
+                winningPositions = [
+                  box3.position,
+                  box5.position,
+                  box7.position,
+                ];
+              else if (EightFiveTwo)
+                winningPositions = [
+                  box2.position,
+                  box5.position,
+                  box8.position,
+                ];
+
+              return <Overlay winningPositions={winningPositions} />;
+            })()}
+
+            {userOne.length < 4 || userTwo.length < 4
+              ? winner && (
+                  <div
+                    id="tryAgain"
+                    className="absolute top-3 left-1/2 -translate-x-1/2  h-full w-full text-sm text-accent rounded px-3 py-1"
+                    style={{ border: "1px solid var(--panel-border)" }}
+                  >
+                    <div className="flex flex-col items-center">
+                      <div className="text-sm text-accent mb-2">
+                        Game finished
+                      </div>
+                      <button
+                        className="btn-accent"
+                        onClick={() => {
+                          // reset board
+                          setBox1({ position: [1, 1], mark: "" });
+                          setBox2({ position: [1, 2], mark: "" });
+                          setBox3({ position: [1, 3], mark: "" });
+                          setBox4({ position: [2, 1], mark: "" });
+                          setBox5({ position: [2, 2], mark: "" });
+                          setBox6({ position: [2, 3], mark: "" });
+                          setBox7({ position: [3, 1], mark: "" });
+                          setBox8({ position: [3, 2], mark: "" });
+                          setBox9({ position: [3, 3], mark: "" });
+                          setUserOne([]);
+                          setUserTwo([]);
+                        }}
+                      >
+                        Try Again
+                      </button>
+                    </div>
+                    {/* <h1>{winner}</h1> */}
+                  </div>
+                )
+              : ""}
           </div>
         </div>
       )}
-
-      <Overlay oneTwoThree={oneTwoThree} ThreeTwoOne={ThreeTwoOne} />
     </>
   );
 }

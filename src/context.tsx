@@ -1,17 +1,50 @@
-import { createContext } from "react";
+import React, { createContext, useCallback, useState } from "react";
 
-export const SocketContext = createContext<WebSocket | null>(null);
-const socket = new WebSocket("ws://10.219.37.21:4001");
-socket.addEventListener("open", () => {
-  console.log("we have established connection with the server");
+type SocketContextShape = {
+  socket: WebSocket | null;
+  connect: (url: string) => void;
+  close: () => void;
+};
 
-  // socket.send(JSON.stringify([userOne, userTwo]));
-});
+export const SocketContext = createContext<SocketContextShape | null>(null);
 
 export const SocketContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const [socket, setSocket] = useState<WebSocket | null>(null);
+
+  const connect = useCallback(
+    (url: string) => {
+      try {
+        if (socket) {
+          socket.close();
+        }
+      } catch (e) {
+        console.warn("error closing previous socket", e);
+      }
+
+      const ws = new WebSocket(url);
+      ws.addEventListener("open", () => {
+        console.log("connected to", url);
+      });
+      ws.addEventListener("error", (e) => {
+        console.error("socket error", e);
+      });
+      setSocket(ws);
+    },
+    [socket]
+  );
+
+  const close = useCallback(() => {
+    if (socket) {
+      socket.close();
+      setSocket(null);
+    }
+  }, [socket]);
+
   return (
-    <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
+    <SocketContext.Provider value={{ socket, connect, close }}>
+      {children}
+    </SocketContext.Provider>
   );
 };
