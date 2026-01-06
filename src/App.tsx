@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { SocketContextProvider, SocketContext } from "./context";
+import { useState } from "react";
+import { SocketContextProvider } from "./context";
 import { Game } from "./Game";
 import ConnectModal from "./ConnectModal";
 

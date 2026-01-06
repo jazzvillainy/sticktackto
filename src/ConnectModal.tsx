@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import  { useState, useContext } from "react";
 import { SocketContext } from "./context";
 
 export default function ConnectModal({
