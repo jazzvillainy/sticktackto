@@ -1,5 +1,7 @@
+import React from "react";
+
 export interface box {
-  position: boxPosition
+  position: boxPosition;
   mark: string;
 }
 
@@ -11,6 +13,8 @@ export interface BoxProps {
   setUserOne: React.Dispatch<React.SetStateAction<boxPosition[]>>;
   userTwo: boxPosition[];
   setUserTwo: React.Dispatch<React.SetStateAction<boxPosition[]>>;
+  disableButtons: boolean;
+  setDisableButtons: React.Dispatch<React.SetStateAction<boolean>>;
   // socket: WebSocket
 }
 

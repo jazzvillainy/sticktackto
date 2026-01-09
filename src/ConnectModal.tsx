@@ -1,4 +1,4 @@
-import  { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { SocketContext } from "./context";
 
 export default function ConnectModal({
@@ -9,7 +9,7 @@ export default function ConnectModal({
   onClose: () => void;
 }) {
   const socketCtx = useContext(SocketContext);
-  const [value, setValue] = useState<string>("ws://localhost:4001");
+  const [value, setValue] = useState<string>("https://xobackend.onrender.com");
   const [error, setError] = useState<string | null>(null);
   const [createdRoom, setCreatedRoom] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -24,14 +24,13 @@ export default function ConnectModal({
       // Basic validation: must start with ws:// or wss:// or look like a room id
       if (!value.startsWith("ws://") && !value.startsWith("wss://")) {
         // treat as room id — translate to default ws host + room path
-        // default host uses localhost and port 4001; adjust as needed
+        // default host uses https://xobackend.onrender.com/ and port 4001; adjust as needed
         const room = encodeURIComponent(value.trim());
-        const url = `ws://localhost:4001/?room=${room}`;
+        const url = `https://xobackend.onrender.com/?room=${room}`;
         socketCtx?.connect(url);
       } else {
         socketCtx?.connect(value);
       }
-
       onClose();
     } catch (err: any) {
       setError(err?.message || String(err));
@@ -50,7 +49,9 @@ export default function ConnectModal({
   const handleCreateRoom = () => {
     setError(null);
     const room = generateRoomId();
-    const url = `ws://localhost:4001/?room=${encodeURIComponent(room)}`;
+    const url = `https://xobackend.onrender.com/?room=${encodeURIComponent(
+      room
+    )}`;
     socketCtx?.connect(url);
     setCreatedRoom(room);
     setValue(room);
@@ -100,16 +101,27 @@ export default function ConnectModal({
             <div>
               <div className="text-sm text-accent">Room created</div>
               <div className="font-mono text-sm mt-1">{createdRoom}</div>
-              <div className="text-xs mt-1 panel-quiet">Share this id with your co-player so they can join.</div>
+              <div className="text-xs mt-1 panel-quiet">
+                Share this id with your co-player so they can join.
+              </div>
             </div>
             <div className="flex flex-col items-end">
               <button
                 className="btn-ghost mb-2"
-                onClick={() => handleCopy(`ws://localhost:4001/?room=${encodeURIComponent(createdRoom)}`)}
+                onClick={() =>
+                  handleCopy(
+                    `https://xobackend.onrender.com/?room=${encodeURIComponent(
+                      createdRoom
+                    )}`
+                  )
+                }
               >
                 {copied ? "Copied" : "Copy URL"}
               </button>
-              <button className="btn-ghost" onClick={() => handleCopy(createdRoom)}>
+              <button
+                className="btn-ghost"
+                onClick={() => handleCopy(createdRoom)}
+              >
                 {copied ? "Copied" : "Copy id"}
               </button>
             </div>

@@ -11,6 +11,8 @@ function Box({
   setUserOne,
   userTwo,
   setUserTwo,
+  disableButtons,
+  setDisableButtons,
 }: BoxProps) {
   const SocketInstance = useContext(SocketContext);
 
@@ -23,6 +25,7 @@ function Box({
       setUserOne([...userOne, box.position.toString()]);
     }
     // const parsedKey = JSON.stringify(position);
+    setDisableButtons(true);
 
     if (clickedBoxPosition == box.position) {
       try {
@@ -62,7 +65,7 @@ function Box({
   return (
     <div className="neon-cell aspect-square rounded-md overflow-hidden grid-separator">
       {!box.mark && (
-        <button
+        <button disabled={disableButtons}
           className="w-full h-full block bg-transparent"
           onClick={() => handleClick(box.position)}
           aria-label={`box-${box.position}`}

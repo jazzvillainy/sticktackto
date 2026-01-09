@@ -98,7 +98,7 @@ button:focus-visible {
   background: linear-gradient(
     135deg,
     var(--panel-bg) 0%,
-    rgba(6, 10, 20, 0.9) 50%,
+    rgba(9, 15, 31, 0.9) 50%,
     rgba(1, 6, 12, 0.95) 100%
   );
   border-radius: 1rem;

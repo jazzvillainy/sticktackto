@@ -7,6 +7,7 @@ import { SocketContext } from "./context";
 export function Game() {
   const [userOne, setUserOne] = useState<boxPosition[]>([]);
   const [userTwo, setUserTwo] = useState<boxPosition[]>([]);
+  const [disableButtons, setDisableButtons] = useState(false);
 
   const [box1, setBox1] = useState<box>({
     position: [1, 1],
@@ -72,6 +73,7 @@ export function Game() {
   SocketInstance?.socket?.addEventListener(
     "message",
     (x: MessageEvent<data>) => {
+      setDisableButtons(false);
       const [
         {
           position: [i, j],
@@ -244,6 +246,8 @@ export function Game() {
                   userTwo={userTwo}
                   setUserOne={setUserOne}
                   setUserTwo={setUserTwo}
+                  disableButtons={disableButtons}
+                  setDisableButtons={setDisableButtons}
                 />
               );
             })}
